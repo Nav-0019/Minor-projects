@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isekai: The Journey Begins</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Outfit:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Background Overlay -->
+        <div class="bg-overlay"></div>
+
+        <!-- Start Screen -->
+        <section id="start-screen" class="screen active">
+            <div class="content-box">
+                <h1 class="game-title">Isekai<br><span class="subtitle">The Journey Begins</span></h1>
+                <p class="intro-text">Enter your name to begin your adventure in a new world.</p>
+                <div class="input-group">
+                    <input type="text" id="player-name-input" placeholder="Enter Hero Name" autocomplete="off">
+                    <button id="start-btn" class="btn primary-btn">Start Adventure</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Screen -->
+        <section id="game-screen" class="screen hidden">
+            <header class="game-header">
+                <div class="player-info">
+                    <h2 id="player-name-display">Hero</h2>
+                    <div class="stats-row">
+                        <span class="stat-badge">Lvl <span id="player-level">0</span></span>
+                        <span class="stat-badge" id="player-position">Traveller</span>
+                    </div>
+                </div>
+                <div class="weapon-info">
+                    <span class="label">Weapon</span>
+                    <span id="player-weapon" class="weapon-name">Wooden Sword</span>
+                </div>
+            </header>
+
+            <main class="game-main">
+                <div class="visual-area">
+                    <div class="battle-stage">
+                        <div class="character-container hero-container">
+                            <img id="hero-image" src="assets/hero.png" alt="Hero" class="entity-img">
+                        </div>
+                        <div class="vs-badge">VS</div>
+                        <div class="character-container monster-container">
+                            <img id="entity-image" src="" alt="Monster" class="entity-img">
+                            <div class="entity-info">
+                                <h3 id="monster-name">Slime</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="log-area">
+                    <p id="game-message">Ready to begin your adventure!</p>
+                </div>
+
+                <div class="game-actions">
+                    <button id="hit-btn" class="btn action-btn attack">⚔️ Hit</button>
+                    <button id="check-status-btn" class="btn action-btn info">📊 Status</button>
+                    <button id="run-btn" class="btn action-btn flee">🏃 Run</button>
+                </div>
+            </main>
+
+            <!-- Reward Modal -->
+            <div id="reward-modal" class="modal hidden">
+                <div class="modal-content reward-content">
+                    <h2 class="reward-title">Victory!</h2>
+                    <div class="reward-details">
+                        <div class="reward-item">
+                            <span class="label">New Position</span>
+                            <span class="value" id="reward-position">Villager</span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="label">New Weapon</span>
+                            <span class="value" id="reward-weapon">Iron Sword</span>
+                        </div>
+                    </div>
+                    <button id="claim-reward-btn" class="btn primary-btn">Claim Reward</button>
+                </div>
+            </div>
+
+            <!-- Upgrade Modal -->
+            <div id="upgrade-modal" class="modal hidden">
+                <div class="modal-content">
+                    <h3>Power Absorbed!</h3>
+                    <ul class="status-list">
+                        <li>HP: <span id="upgrade-hp">100</span></li>
+                        <li>EP: <span id="upgrade-ep">100</span></li>
+                        <li>MP: <span id="upgrade-mp">50</span></li>
+                        <li>Strength: <span id="upgrade-strength">10</span></li>
+                        <li>Agility: <span id="upgrade-agility">5</span></li>
+                        <li>Power: <span id="upgrade-power">20</span></li>
+                    </ul>
+                    <button id="absorb-power-btn" class="btn primary-btn">Continue</button>
+                </div>
+            </div>
+
+            <!-- Status Modal -->
+            <div id="status-modal" class="modal hidden">
+                <div class="modal-content">
+                    <h3>Hero Status</h3>
+                    <ul class="status-list">
+                        <li>HP: <span id="status-hp">100</span></li>
+                        <li>EP: <span id="status-ep">100</span></li>
+                        <li>MP: <span id="status-mp">50</span></li>
+                        <li>Strength: <span id="status-strength">10</span></li>
+                        <li>Agility: <span id="status-agility">5</span></li>
+                        <li>Equipment: <span id="status-equip">Wooden Sword</span></li>
+                        <li>Power: <span id="status-power">20</span></li>
+                    </ul>
+                    <button id="close-status-btn" class="btn secondary-btn">Close</button>
+                </div>
+            </div>
+
+            <!-- Attack Number Modal -->
+            <div id="attack-modal" class="modal hidden">
+                <div class="modal-content">
+                    <h3>⚔️ Attack!</h3>
+                    <p id="attack-prompt">Enter your attack number to hit the monster!</p>
+                    <p id="attack-range" style="color: var(--accent-color); margin: 1rem 0; font-weight: bold;">Range: 0
+                        - 1</p>
+                    <input type="number" id="attack-input" min="0" placeholder="Enter number"
+                        style="margin-bottom: 1rem;">
+                    <div class="modal-actions">
+                        <button id="submit-attack-btn" class="btn primary-btn">Strike!</button>
+                        <button id="cancel-attack-btn" class="btn secondary-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- End Screen -->
+        <section id="end-screen" class="screen hidden">
+            <div class="content-box">
+                <h1 id="end-title" class="game-title">Game Over</h1>
+                <p id="end-message">Your journey has ended.</p>
+                <button id="restart-btn" class="btn primary-btn">Reincarnate</button>
+            </div>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
